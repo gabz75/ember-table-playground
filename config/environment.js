@@ -16,7 +16,17 @@ module.exports = function(environment) {
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
-    }
+    },
+
+    contentSecurityPolicy: {
+      'default-src': "'none'",
+      'connect-src': "'self' *'",
+      'img-src': "'self' *",
+      'font-src': "'self' * data:* data: *",
+      'style-src': "'self' 'unsafe-inline' *",
+      'script-src': "'self' 'unsafe-inline' *",
+      'frame-src': "'self' js.stripe.com assets.zendesk.com",
+    },
   };
 
   if (environment === 'development') {
