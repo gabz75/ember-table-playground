@@ -37,6 +37,7 @@
     "ember-data": "^1.13.15",
     "ember-disable-proxy-controllers": "^1.0.1",
     "ember-export-application-global": "^1.0.4",
+    "ember-infinity": "0.2.1",
     "ember-inflector": "1.9.4",
     "ember-table": "git@github.com:Addepar/ember-table.git#cyril/ember-1.13"
   }
