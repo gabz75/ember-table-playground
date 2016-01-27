@@ -2,7 +2,17 @@ import Ember from 'ember';
 import RowProxy from './user-row-proxy';
 
 export default Ember.ArrayProxy.extend({
-  numRows: 10,
+  numRows: 50,
+
+  createUser: function(row, user) {
+    row.set('id', user.id);
+    row.set('firstName', user.first_name);
+    row.set('lastName', user.last_name);
+    row.set('email', user.email);
+    row.set('phoneNumber', user.phoneNumber);
+    row.set('region', user.region);
+    row.set('status', user.status);
+  },
 
   requestPage : function(page) {
     var content, end, start, _results;
@@ -12,12 +22,19 @@ export default Ember.ArrayProxy.extend({
     end = start + this.get('numRows');
 
     // Find users and then update the RowProxy to hold a user as 'object'
-    this.get('store').findAll('user').then(function(users){
+    this.get('store').query('user', { size: this.get('numRows'), offset: start } ).then(function(users){
       return users.forEach(function(user, index) {
         var position = start + index;
         content[position].set('object', user);
       });
     });
+
+    // Ember.$.getJSON(`/api/v3/users?size=${ this.get('numRows') }&offset=${ start }`, function(json) {
+    //   return json.users.forEach(function(user, index) {
+    //     var row = content[start + index];
+    //     return this.createUser(row, user);
+    //   }.bind(this));
+    // }.bind(this));
 
     // Fill the 'content' array with RowProxy objects
     // Taken from the 'requestGithubEvent' method of the original example
@@ -33,7 +50,7 @@ export default Ember.ArrayProxy.extend({
       return _results;
     }).apply(this).forEach(function(index) {
       return content[index] = RowProxy.create({
-        index: index
+        index: index,
       });
     });
   },

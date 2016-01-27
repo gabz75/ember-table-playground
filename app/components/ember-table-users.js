@@ -5,7 +5,7 @@ import UserDataSource from 'breeze-fleet/tables/user-data-source';
 
 export default TableComponent.extend({
   store: Ember.inject.service(),
-  numRows: 10,
+  numRows: 1000,
 
   columns: Ember.computed(function() {
     return [
@@ -59,20 +59,7 @@ export default TableComponent.extend({
     return UserDataSource.create({
       content: new Array(this.get('numRows')),
       store : this.get('store'),
-      numRows: this.get('numRows'),
     });
-    // return [
-    //   {
-    //     id: 10,
-    //     firstName: "Leonora",
-    //     lastName: "Botsford",
-    //     email: "leonorabotsford@example.net",
-    //     phoneNumber: "4671687921",
-    //     rejectReason: null,
-    //     region: "San Diego",
-    //     status: "pending"
-    //   }
-    // ];
   }).property('numRows'),
 
 });
