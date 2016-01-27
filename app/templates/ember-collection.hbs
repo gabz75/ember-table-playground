@@ -1,0 +1,17 @@
+<div class="table-container" style="position:relative;height:450px; width: 450px;">
+  {{#ember-collection
+    items=model.users
+    cell-layout=(fixed-grid-layout 800 50) as |item index|
+  }}
+    {{item.id}}
+    {{item.firstName}}
+    {{item.lastName}}
+    {{item.email}}
+  {{/ember-collection}}
+</div>
+
+<button {{action 'previous'}}>Previous</button>
+<button {{action 'next'}}>Next</button>
+
+<button {{action 'size' 20}}>Size: 20</button>
+<button {{action 'size' 50}}>Size: 50</button>
