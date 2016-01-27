@@ -1,13 +1,8 @@
 import Ember from 'ember';
-import TableComponent from 'ember-table/components/ember-table';
 import ColumnDefinition from 'ember-table/models/column-definition';
-import UserDataSource from 'breeze-fleet/tables/user-data-source';
 
-export default TableComponent.extend({
-  store: Ember.inject.service(),
-  numRows: 10,
-
-  columns: Ember.computed(function() {
+export default Ember.Controller.extend({
+  tableColumns: function() {
     return [
       ColumnDefinition.create({
         savedWidth: 150,
@@ -53,26 +48,22 @@ export default TableComponent.extend({
         }
       }),
     ];
-  }).property(),
+  }.property(),
 
-  content: Ember.computed(function() {
-    return UserDataSource.create({
-      content: new Array(this.get('numRows')),
-      store : this.get('store'),
-      numRows: this.get('numRows'),
-    });
-    // return [
-    //   {
-    //     id: 10,
-    //     firstName: "Leonora",
-    //     lastName: "Botsford",
-    //     email: "leonorabotsford@example.net",
-    //     phoneNumber: "4671687921",
-    //     rejectReason: null,
-    //     region: "San Diego",
-    //     status: "pending"
-    //   }
-    // ];
-  }).property('numRows'),
-
+  tableContent: function() {
+    var content = [];
+    var date;
+    for (var i = 0; i < 100; i++) {
+      date = new Date(2000, 1, 5);
+      content.pushObject({
+        date: date,
+        open: 100,
+        high: 100,
+        low: 100,
+        close: 100,
+        volume: 100,
+      });
+    }
+    return content;
+  }.property(),
 });

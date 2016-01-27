@@ -1,13 +1,9 @@
-<p>Ember Table with Controller/View</p>
+<p>Basic Ember Table with Controller/View</p>
 
 {{ember-table
-  hasFooter=true
+  hasFooter=false
   columns=tableColumns
-  content=model.users
+  content=model
 }}
 
-<button {{action 'loadMore'}}>Load More Users</button>
-
-<p>Ember Table with Component</p>
-
-{{ember-table-users}}
+{{infinity-loader infinityModel=model}}

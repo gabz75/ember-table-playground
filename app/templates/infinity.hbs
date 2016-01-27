@@ -1,0 +1,7 @@
+<p>List of Users with ember-infinity</p>
+
+{{#each model as |user|}}
+<p>{{user.id}} - {{user.fisrtName}} {{user.lastName}}</p>
+{{/each}}
+
+{{infinity-loader infinityModel=model}}

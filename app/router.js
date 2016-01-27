@@ -7,6 +7,8 @@ const Router = Ember.Router.extend({
 
 Router.map(function() {
   this.route('users');
+  this.route('infinity');
+  this.route('ember-table-component');
 });
 
 export default Router;
