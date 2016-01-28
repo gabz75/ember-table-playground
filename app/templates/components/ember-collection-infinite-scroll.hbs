@@ -1,0 +1,12 @@
+<div class="table-container" style="position:relative; height: 500px; width: 450px;">
+  {{#ember-collection
+    items=collection
+    scroll-change=(action 'scrollChange')
+    cell-layout=(fixed-grid-layout 400 30) as |item index|
+  }}
+    {{item.id}}
+    {{item.firstName}}
+    {{item.lastName}}
+    {{item.email}}
+  {{/ember-collection}}
+</div>

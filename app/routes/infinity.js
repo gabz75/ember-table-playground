@@ -2,17 +2,19 @@ import Ember from 'ember';
 import InfinityRoute from "ember-infinity/mixins/route";
 
 export default Ember.Route.extend(InfinityRoute, {
-  size: 10,
+  size: 100,
   perPageParam: 'size',
   pageParam: 'offset',
+  totalPagesParam: 'meta.total',
 
   model() {
-    return this.infinityModel('user', { perPage: this.get('size'), startingPage: 1 });
-  },
+    return Ember.RSVP.hash({
+      users: this.infinityModel('user', {
+        perPage: this.get('size'),
+        startingPage: 1,
+        modelPath: 'controller.model.users',
+      }),
 
-  setupController(controller, model) {
-    this._super(...arguments);
-    controller.set('model', model);
+    });
   },
-
 });

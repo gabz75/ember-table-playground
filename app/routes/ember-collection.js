@@ -2,13 +2,18 @@ import Ember from 'ember';
 import InfinityRoute from "ember-infinity/mixins/route";
 
 export default Ember.Route.extend(InfinityRoute, {
-  size: 1000,
+  size: 20,
   offset: 0,
+  perPageParam: 'size',
+  pageParam: 'offset',
 
   model() {
+    var users = this.infinityModel('user', { perPage: this.get('size'), startingPage: 1 });
     return Ember.RSVP.hash({
-      users: this.store.query('user', { offset: this.get('offset'), size: this.get('size') }),
+      // users: this.store.query('user', { offset: this.get('offset'), size: this.get('size') }),
+      users: users
     });
+    // return this.infinityModel('user', { perPage: this.get('size'), startingPage: 1 });
   },
 
   actions: {
@@ -31,8 +36,13 @@ export default Ember.Route.extend(InfinityRoute, {
       }));
     },
 
+
     size(size) {
       console.log(size);
     },
+
+    scrollChange() {
+
+    }
   },
 });

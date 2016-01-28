@@ -8,4 +8,5 @@ export default DS.Model.extend({
   rejectReason: DS.attr('string'),
   region: DS.attr('string'),
   status: DS.attr('string'),
+  updatedAt: DS.attr('string'),
 });
